@@ -1,6 +1,4 @@
 import java.io.File;
-import java.nio.file.Files;
-import java.util.Locale;
 
 public class Rename {
     public static final String DIR = "./Rename";
@@ -13,6 +11,7 @@ public class Rename {
         //removeType(files);
         //toPNG(files);
 
+        removeFirst(files, 3);
 
         //seperateGetByPos(files, "_", 3);
         //seperateRemByPos(files,"-", 2);
@@ -78,6 +77,38 @@ public class Rename {
             if (!file.getName().equals(".DS_Store")) {
                 fileName = file.getName();
                 newName = "" + DIR + "/" + fileName.toUpperCase();
+
+                File newFile = new File(newName);
+                file.renameTo(newFile);
+            }
+        }
+    }
+
+    public static void removeFirst(File[] files, int amount) {
+        String fileName, newName;
+
+        for (File file : files) {
+            if (!file.getName().equals(".DS_Store")) {
+                fileName = file.getName();
+
+                newName = "" + DIR + "/"  + fileName.substring(amount);
+
+
+                File newFile = new File(newName);
+                file.renameTo(newFile);
+            }
+        }
+    }
+
+    public static void removeLast(File[] files, int amount) {
+        String fileName, newName;
+
+        for (File file : files) {
+            if (!file.getName().equals(".DS_Store")) {
+                fileName = file.getName();
+
+                newName = "" + DIR + "/"  + fileName.substring(0,fileName.length()-3);
+
 
                 File newFile = new File(newName);
                 file.renameTo(newFile);
